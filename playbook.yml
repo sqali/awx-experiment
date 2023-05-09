@@ -1,0 +1,11 @@
+- name: Display OS details
+  hosts: myhosts
+  gather_facts: true
+  tasks:
+    - name: Display OS details
+      command: cat /etc/os-release
+      register: os_details
+
+    - name: Print OS details
+      debug:
+        var: os_details.stdout_lines
