@@ -1,5 +1,5 @@
 - name: Display OS details
-  hosts: myhosts
+  hosts: localhost
   gather_facts: true
   tasks:
     - name: Display OS details
