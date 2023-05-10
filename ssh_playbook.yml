@@ -1,5 +1,5 @@
 ---
-- hosts: myhost
+- hosts: myhosts
   tasks:
     - name: Test SSH connection
       ping:
