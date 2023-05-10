@@ -3,14 +3,7 @@
   hosts: myhosts
   gather_facts: true
   vars_files:
-    - password.yml
-  tasks:
-    - name: Copy file with remote_src
-      copy:
-        src: /home/qaiser/password.yml
-        dest: /var/lib/awx/projects/_12__github_playbook/password.yml
-        mode: '0600'
-        remote_src: yes
+    - /home/qaiser/password.yml
   tasks:
     - name: Ping test
       ping:
