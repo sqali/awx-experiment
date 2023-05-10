@@ -3,7 +3,7 @@
   hosts: myhosts
   gather_facts: true
   vars_files:
-    - /home/qaiser/password.yml
+    - remote_src: /home/qaiser/password.yml
   tasks:
     - name: Ping test
       ping:
