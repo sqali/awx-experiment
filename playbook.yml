@@ -8,7 +8,7 @@
     - name: Copy file with remote_src
       copy:
         src: ~/password.yml
-        dest: /var/lib/awx/projects/myproject/password.yml
+        dest: /var/lib/awx/projects/_12__github_playbook/password.yml
         mode: '0600'
         remote_src: yes
   tasks:
