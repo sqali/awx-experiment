@@ -3,7 +3,7 @@
   hosts: myhosts
   gather_facts: true
   vars_files:
-    - var/password.yml
+    - var/lib/awx/projects/_12__github_playbook/password.yml
   tasks:
     - name: Ping test
       ping:
