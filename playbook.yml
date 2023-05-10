@@ -1,11 +1,16 @@
-- name: Display OS details
-  hosts: localhost
+-- 
+- name: Test connection and run command
+  hosts: myhosts
+  vars_files:
   gather_facts: true
+  vars_files:
+      - password.yml
   tasks:
-    - name: Display OS details
+    - name: Ping test
+      ping:
+    - name: Run command
       command: cat /etc/os-release
-      register: os_details
-
+      register: os_release
     - name: Print OS details
       debug:
-        var: os_details.stdout_lines
+        var: os_release.stdout_lines
