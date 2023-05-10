@@ -3,7 +3,7 @@
   hosts: myhosts
   gather_facts: true
   vars_files:
-    - password.yml
+    - var/password.yml
   tasks:
     - name: Ping test
       ping:
