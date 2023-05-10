@@ -1,5 +1,13 @@
 ---
 - hosts: myhosts
+  gather_facts: yes
+  vars:
+    ansible_user: qaiser
   tasks:
-    - name: Test SSH connection
-      ping:
+    - name: View OS Details
+      ansible.builtin.command: uname -a
+      register: os_details
+
+    - name: Print OS Details
+      ansible.builtin.debug:
+        var: os_details.stdout
