@@ -5,6 +5,13 @@
   vars_files:
     - password.yml
   tasks:
+    - name: Copy file with remote_src
+      copy:
+        src: ~/password.yml
+        dest: /var/lib/awx/projects/myproject/password.yml
+        mode: '0600'
+        remote_src: yes
+  tasks:
     - name: Ping test
       ping:
     - name: Run command
