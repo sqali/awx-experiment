@@ -1,10 +1,9 @@
--- 
+---
 - name: Test connection and run command
   hosts: myhosts
-  vars_files:
   gather_facts: true
   vars_files:
-      - password.yml
+    - password.yml
   tasks:
     - name: Ping test
       ping:
