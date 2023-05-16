@@ -2,6 +2,8 @@
 - name: SSH Connection
   hosts: myhosts
   gather_facts: false
+  vars_files:
+    - /var/password.yml
   tasks:
     - name: Establish SSH Connection
       ansible.builtin.ping:
@@ -10,15 +12,3 @@
     - name: Print SSH Connection Result
       ansible.builtin.debug:
         var: ssh_result
-
-- name: Ping Test
-  hosts: myhosts
-  gather_facts: true
-  tasks:
-    - name: Ping the host
-      ansible.builtin.ping:
-      register: ping_result
-
-    - name: Print Ping Result
-      ansible.builtin.debug:
-        var: ping_result
