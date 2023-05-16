@@ -6,6 +6,10 @@
   vars_files:
       - /var/password.yml
   tasks:
+    - name: Run command on remote host
+      command: "sshpass -p '{{ lookup('env', 'SSH_PASSWORD') }}' ssh -o StrictHostKeyChecking=no qaiser@192.168.186.128 'cat /etc/os-release'"
+      register: os_release
+      delegate_to: localhost
     - name: Run command
       command: cat /etc/os-release
       register: os_release
