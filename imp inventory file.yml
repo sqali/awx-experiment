@@ -1,0 +1,24 @@
+{
+  "name": "Host OS Inventory",
+  "description": "Inventory for the host operating system",
+  "organization": 1,
+  "kind": "",
+  "host_filter": null,
+  "variables": "",
+  "insights_credential": null,
+  "pending_deletion": false,
+  "has_active_failures": false,
+  "total_hosts": 1,
+  "myhosts": [
+    {
+      "name": "myhosts",
+      "description": "",
+      "ansible_connection": "local",
+      "ansible_host": "192.168.186.128",
+      "enabled": true,
+      "instance_id": "",
+      "group": null,
+      "variables": ""
+    }
+  ]
+}
