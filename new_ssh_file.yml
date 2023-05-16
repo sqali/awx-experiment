@@ -1,27 +1,14 @@
 ---
-- name: SSH Connection and View AWX Directory
+- name: Test connection and run command
   hosts: localhost
+  vars_files:
+  gather_facts: true
+  vars_files:
+      - /var/password.yml
   tasks:
-    - name: Decrypt SSH password
-      ansible.builtin.include_vars:
-        file: /var/password.yml
-        name: ssh_password
-      vars:
-        ansible_vault_password_file: /path/to/awx/vault/credentials
-
-    - name: Establish SSH Connection
-      ansible.builtin.shell: "sshpass -f /var/password.yml ssh -o StrictHostKeyChecking=no qaiser@192.168.186.128 hostname"
-      register: ssh_result
-      delegate_to: localhost
-
-    - name: Print SSH Connection Result
-      ansible.builtin.debug:
-        var: ssh_result.stdout
-
-    - name: List files in AWX directory
-      ansible.builtin.shell: ls /var/lib/awx
-      register: file_list
-
-    - name: Display file list
-      ansible.builtin.debug:
-        var: file_list.stdout_lines
+    - name: Run command
+      command: cat /etc/os-release
+      register: os_release
+    - name: Print OS details
+      debug:
+        var: os_release.stdout_lines
