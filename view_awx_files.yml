@@ -1,0 +1,11 @@
+---
+- name: View AWX directory
+  hosts: localhost
+  tasks:
+    - name: List files in AWX directory
+      shell: ls /var/lib/awx
+      register: file_list
+
+    - name: Display file list
+      debug:
+        var: file_list.stdout_lines
