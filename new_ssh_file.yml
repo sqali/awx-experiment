@@ -6,8 +6,6 @@
       ansible.builtin.include_vars:
         file: /var/password.yml
         name: ssh_password
-      vars_files:
-        - /path/to/vault/password.vault
       vars:
         ansible_vault_password_file: /path/to/awx/vault/credentials
 
