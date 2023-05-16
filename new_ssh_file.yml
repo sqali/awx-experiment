@@ -6,13 +6,21 @@
   vars_files:
       - /var/password.yml
   tasks:
+    - name: Set vault password from AWX credentials
+      ansible.builtin.set_fact:
+        vault_password: "{{ SSH_PASSWORD }}"
+      delegate_to: localhost
+      run_once: true
+      
     - name: Run command on remote host
-      ansible.builtin.command: "sshpass -p '{{ lookup('env', 'SSH_PASSWORD') }}' ssh -o StrictHostKeyChecking=no qaiser@192.168.186.128 'cat /etc/os-release'"
+      ansible.builtin.command: "sshpass -p '{{ vault_password }}' ssh -o StrictHostKeyChecking=no qaiser@192.168.186.128 'cat /etc/os-release'"
       register: os_release
       delegate_to: localhost
+      
     - name: Run command
       command: cat /etc/os-release
       register: os_release
+      
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
