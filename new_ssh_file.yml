@@ -6,17 +6,31 @@
   vars_files:
       - /var/password.yml
   tasks:
-    - name: Set vault password from AWX credentials
+    - name: Test connection and run command
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Prompt for vault password
+      ansible.builtin.pause:
+        prompt: "Enter the vault password: "
+      register: vault_password
+
+    - name: Decrypt SSH password
+      ansible.builtin.command: ansible-vault decrypt /var/password.yml --output=- --vault-password-file=/dev/stdin
+      register: decrypted_password
+      no_log: true
+      args:
+        stdin: "{{ vault_password.user_input }}"
+
+    - name: Set vault password from decrypted output
       ansible.builtin.set_fact:
-        vault_password: "{{ SSH_PASSWORD }}"
-      delegate_to: localhost
-      run_once: true
-      
+        vault_password: "{{ decrypted_password.stdout }}"
+
     - name: Run command on remote host
       ansible.builtin.command: "sshpass -p '{{ vault_password }}' ssh -o StrictHostKeyChecking=no qaiser@192.168.186.128 'cat /etc/os-release'"
       register: os_release
       delegate_to: localhost
-      
+
     - name: Run command
       command: cat /etc/os-release
       register: os_release
