@@ -1,13 +1,17 @@
 ---
-- hosts: myhosts
-  gather_facts: yes
+- name: Gather OS details
+  hosts: myhosts
+  gather_facts: true
   vars:
-    ansible_user: qaiser
+    ansible_become: yes
+    ansible_become_method: su
+    ansible_become_user: root
   tasks:
-    - name: View OS Details
-      ansible.builtin.command: uname -a
+    - name: Gather OS details
+      ansible.builtin.command: "cat /etc/os-release"
+      delegate_to: "{{ myhosts }}"
       register: os_details
 
-    - name: Print OS Details
+    - name: Print OS details
       ansible.builtin.debug:
         var: os_details.stdout
