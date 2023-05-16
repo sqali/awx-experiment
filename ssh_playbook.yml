@@ -1,6 +1,23 @@
----
-- name: Ping the host OS
+- name: Ping Test
   hosts: myhosts
+  gather_facts: false
   tasks:
-    - name: Run ping command
-      ping:
+    - name: Ping the host
+      ansible.builtin.ping:
+      register: ping_result
+
+    - name: Print Ping Result
+      ansible.builtin.debug:
+        var: ping_result
+
+- name: SSH Connection Test
+  hosts: myhosts
+  gather_facts: true
+  tasks:
+    - name: Establish SSH Connection
+      ansible.builtin.command: "echo 'SSH Connection Successful'"
+      register: ssh_result
+
+    - name: Print SSH Result
+      ansible.builtin.debug:
+        var: ssh_result.stdout
