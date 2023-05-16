@@ -1,17 +1,6 @@
 ---
-- name: Gather OS details
+- name: Ping the host OS
   hosts: myhosts
-  gather_facts: true
-  vars:
-    ansible_become: yes
-    ansible_become_method: su
-    ansible_become_user: root
   tasks:
-    - name: Gather OS details
-      ansible.builtin.command: "cat /etc/os-release"
-      delegate_to: "{{ myhosts }}"
-      register: os_details
-
-    - name: Print OS details
-      ansible.builtin.debug:
-        var: os_details.stdout
+    - name: Run ping command
+      ping:
