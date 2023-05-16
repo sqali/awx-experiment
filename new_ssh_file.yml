@@ -6,6 +6,8 @@
   vars_files:
       - /var/password.yml
   tasks:
+    - name: ping host
+      command: ping qaiser@192.168.186.128
     - name: Run command
       command: cat /etc/os-release
       register: os_release
