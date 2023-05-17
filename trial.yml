@@ -15,6 +15,5 @@
         var: os_release.stdout_lines
         
     - name: SSH to target host
-      command: ssh {{ item }}
-      with_file:
-        - /var/inventory.yml
+      command: ssh 192.168.186.128
+      ignore_errors: true
