@@ -13,12 +13,4 @@
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
-        
-    - name: SSH into 192.168.186.128 and ping
-      command: ssh qaiser@192.168.186.128 ping -c 4 localhost
-      register: ssh_output
-
-    - name: Print SSH command output
-      debug:
-        var: ssh_output.stdout_lines
 
