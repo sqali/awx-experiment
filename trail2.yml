@@ -1,16 +1,13 @@
 ---
 - name: Test connection and run command
-  hosts: all
-  become: yes
-  become_user: qaiser
-  become_method: sudo
-  vars_files:
-      - /var/password.yml
-      
+  hosts: myhosts
+  gather_facts: true
+  
   tasks:
     - name: Run command
       command: cat /etc/os-release
       register: os_release
+      
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
