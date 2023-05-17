@@ -1,7 +1,6 @@
 ---
 - name: Test connection and run command
   hosts: localhost
-  vars_files:
   gather_facts: true
   vars_files:
       - /var/password.yml
