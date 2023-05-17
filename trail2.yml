@@ -1,12 +1,13 @@
--- 
+---
 - name: Test connection and run command
-  hosts: myhosts
-  gather_facts: true
+  hosts: all
+  become: yes
+  become_user: qaiser
+  become_method: sudo
   vars_files:
       - var/password.yml
+      
   tasks:
-    - name: Ping test
-      ping:
     - name: Run command
       command: cat /etc/os-release
       register: os_release
