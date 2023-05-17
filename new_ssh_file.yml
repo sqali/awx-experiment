@@ -14,14 +14,10 @@
       debug:
         var: os_release.stdout_lines
         
-    - name: Decrypt encrypted file
-      command: ansible-vault decrypt /var/checkfile.txt --output /var/decrypted_file.txt --ask-vault-pass
-      register: decrypt_output
+    - name: View encrypted file
+      command: ansible-vault view /var/checkfile.txt --ask-vault-pass
+      register: encrypted_file_output
 
-    - name: Print decrypted file contents
-      command: cat /var/decrypted_file.txt
-      register: decrypted_file_output
-
-    - name: Debug decrypted file contents
+    - name: Print encrypted file contents
       debug:
-        var: decrypted_file_output.stdout_lines
+        var: encrypted_file_output.stdout_lines
