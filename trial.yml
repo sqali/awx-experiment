@@ -29,17 +29,16 @@
 
     - name: Set target host variables
       set_fact:
-        target_host: "{{ hosts_file_content['content'] | b64decode | from_yaml }}"
+        target_host: "{{ hosts_file_content['content'] | b64decode | from_yaml | first }}"
 
-    - name: SSH to target host
-      tasks:
-        - name: Run command on remote host
-          command: echo "Hello, World!"
-          register: command_output
-          become: yes
-          become_user: qaiser
-          delegate_to: "{{ target_host['ansible_host'] }}"
+    - name: Test SSH connection
+      wait_for:
+        host: "{{ target_host['ansible_host'] }}"
+        port: 22
+        state: started
+        timeout: 10
+      register: ssh_connection_status
 
-        - name: Print command output
-          debug:
-            var: command_output.stdout_lines
+    - name: Print SSH connection status
+      debug:
+        msg: "SSH connection to {{ target_host['ansible_host'] }} {{ 'is established' if ssh_connection_status is succeeded else 'failed' }}"
