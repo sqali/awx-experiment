@@ -15,7 +15,7 @@
         var: os_release.stdout_lines
         
     - name: Decrypt encrypted file
-      command: ansible-vault decrypt /var/checkfile.txt --output /var/decrypted_file.txt --vault-password-file /var/password.yml
+      command: ansible-vault decrypt /var/checkfile.txt --output /var/decrypted_file.txt --ask-vault-pass
       register: decrypt_output
 
     - name: Print decrypted file contents
