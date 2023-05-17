@@ -21,3 +21,26 @@
     - name: Print encrypted file contents
       debug:
         var: encrypted_file_output.stdout_lines
+        
+    - name: Read hosts file
+      slurp:
+        src: /var/hosts
+      register: hosts_file_content
+
+    - name: Set target host variables
+      set_fact:
+        target_host: "{{ hosts_file_content['content'] | b64decode | from_yaml }}"
+
+    - name: SSH to target host
+      hosts: "{{ target_host }}"
+      gather_facts: false
+      tasks:
+        - name: Run command on remote host
+          command: echo "Hello, World!"
+          register: command_output
+          become: yes
+          become_user: qaiser
+
+        - name: Print command output
+          debug:
+            var: command_output.stdout_lines
