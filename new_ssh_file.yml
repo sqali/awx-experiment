@@ -13,3 +13,12 @@
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
+        
+    - name: View encrypted file
+      ansible.builtin.shell:
+        cmd: cat /var/checkfile.txt
+      register: encrypted_file_output
+
+    - name: Print encrypted file contents
+      debug:
+        var: encrypted_file_output.stdout_lines
