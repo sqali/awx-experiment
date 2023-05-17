@@ -5,7 +5,7 @@
   become_user: qaiser
   become_method: sudo
   vars_files:
-      - var/password.yml
+      - /var/password.yml
       
   tasks:
     - name: Run command
