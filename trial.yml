@@ -3,29 +3,18 @@
   hosts: localhost
   gather_facts: true
   vars_files:
-    - /var/password.yml
-
+      - /var/password.yml
+      
   tasks:
     - name: Run command
       command: cat /etc/os-release
       register: os_release
-
+      
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
-
-    - name: View encrypted file
-      command: ansible-vault view /var/checkfile.txt --ask-vault-pass
-      register: encrypted_file_output
-
-    - name: Print encrypted file contents
-      debug:
-        var: encrypted_file_output.stdout_lines
-
-    - name: Display IP address
-      command: "hostname -I"
-      register: ip_address_output
-
-    - name: Print IP address
-      debug:
-        var: ip_address_output.stdout_lines
+        
+    - name: SSH to target host
+      command: ssh {{ item }}
+      with_file:
+        - /var/inventory.yml
