@@ -1,0 +1,15 @@
+-- 
+- name: Test connection and run command
+  hosts: myhosts
+  gather_facts: true
+  vars_files:
+      - var/password.yml
+  tasks:
+    - name: Ping test
+      ping:
+    - name: Run command
+      command: cat /etc/os-release
+      register: os_release
+    - name: Print OS details
+      debug:
+        var: os_release.stdout_lines
