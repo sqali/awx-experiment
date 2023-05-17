@@ -1,0 +1,23 @@
+---
+- name: Test connection and run command
+  hosts: localhost
+  gather_facts: true
+  vars_files:
+      - /var/password.yml
+      
+  tasks:
+    - name: Run command
+      command: cat /etc/os-release
+      register: os_release
+      
+    - name: Print OS details
+      debug:
+        var: os_release.stdout_lines
+        
+    - name: View encrypted file
+      command: ansible-vault view /var/checkfile.txt --ask-vault-pass
+      register: encrypted_file_output
+
+    - name: Print encrypted file contents
+      debug:
+        var: encrypted_file_output.stdout_lines
