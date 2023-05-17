@@ -15,5 +15,5 @@
         var: os_release.stdout_lines
         
     - name: SSH to target host
-      command: ssh 192.168.186.128
+      command: ssh qaiser@192.168.186.128
       ignore_errors: true
