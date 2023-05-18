@@ -1,7 +1,8 @@
 ---
 - name: Test connection and run command
-  hosts: myhosts
+  hosts: 192.168.186.128
   gather_facts: true
+  remote_user: qaiser
   
   tasks:
     - name: Run command
