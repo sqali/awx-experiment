@@ -1,14 +1,14 @@
 ---
 - name: Test connection and run command
-  hosts: 192.168.186.128
-  gather_facts: true
-  remote_user: qaiser
-  
+  hosts: localhost
+  gather_facts: false
+
   tasks:
     - name: Run command
-      command: cat /etc/os-release
+      ansible.builtin.command:
+        cmd: ssh qaiser@192.168.186.128 'cat /etc/os-release'
       register: os_release
-      
+
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
