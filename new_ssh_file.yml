@@ -2,8 +2,6 @@
 - name: Test connection and run command
   hosts: 192.168.186.128
   gather_facts: true
-  vars_files:
-      - /var/password.yml
       
   tasks:
     - name: Run command
