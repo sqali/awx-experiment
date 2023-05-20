@@ -4,6 +4,8 @@
   gather_facts: true
   become: true
   become_user: root
+  vars_files:
+    - /var/password.yml
 
   tasks:
     - name: Test ping
@@ -25,6 +27,10 @@
       debug:
         var: ip_address_output.stdout_lines
 
+    - name: Set sudo password
+      set_fact:
+        ansible_become_password: "{{ Sayedali@732 }}"
+
     - name: Check current user
       command: whoami
       register: current_user
@@ -32,3 +38,4 @@
     - name: Print current user
       debug:
         var: current_user.stdout
+
