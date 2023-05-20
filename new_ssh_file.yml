@@ -4,6 +4,8 @@
   gather_facts: true
       
   tasks:
+    - name: Test ping
+      ping:
     - name: Run command
       command: cat /etc/os-release
       register: os_release
