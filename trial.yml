@@ -2,10 +2,10 @@
 - name: Test connection and run command
   hosts: 192.168.186.128
   gather_facts: true
-  become: true
   become_user: root
   vars_files:
-    - /var/password.yml
+    - var/password.yml
+    - var/sudo_password.yml
 
   tasks:
     - name: Test ping
