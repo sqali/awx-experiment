@@ -1,7 +1,7 @@
 ---
 - name: Test connection and run command
   hosts: 192.168.186.128
-  gather_facts: true
+  #gather_facts: true
   vars_files:
     - /var/password.yml
     
@@ -13,11 +13,3 @@
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
-
-    - name: Display IP address
-      command: "hostname -I"
-      register: ip_address_output
-
-    - name: Print IP address
-      debug:
-        var: ip_address_output.stdout_lines
