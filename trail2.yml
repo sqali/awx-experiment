@@ -5,6 +5,7 @@
   become: true
   become_user: root
   vars_files:
+    - /var/password.yml
       
   tasks:
     - name: Test ping
