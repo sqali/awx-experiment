@@ -2,6 +2,8 @@
 - name: Test connection and run command
   hosts: 192.168.186.128
   gather_facts: true
+  become: true
+  become_user: root
       
   tasks:
     - name: Test ping
