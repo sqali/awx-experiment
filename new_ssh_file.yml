@@ -1,6 +1,6 @@
 ---
 - name: Test connection and run command
-  hosts: qaiser@192.168.186.128
+  hosts: 192.168.186.128
   gather_facts: true
   vars_files:
       - /var/password.yml
