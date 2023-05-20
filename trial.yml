@@ -4,8 +4,7 @@
   gather_facts: true
   become_user: root
   vars_files:
-    - var/password.yml
-    - var/sudo_password.yml
+    - var/sudo_ssh_power.yml
 
   tasks:
     - name: Test ping
