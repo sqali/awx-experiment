@@ -6,18 +6,19 @@
   become_user: root
   vars_files:
     - /var/password.yml
-      
+
   tasks:
     - name: Test ping
       ping:
+
     - name: Run command
       command: cat /etc/os-release
       register: os_release
-      
+
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
-        
+
     - name: Display IP address
       command: "hostname -I"
       register: ip_address_output
@@ -25,3 +26,11 @@
     - name: Print IP address
       debug:
         var: ip_address_output.stdout_lines
+
+    - name: Check current user
+      command: whoami
+      register: current_user
+
+    - name: Print current user
+      debug:
+        var: current_user.stdout
