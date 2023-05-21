@@ -2,20 +2,21 @@
 - name: Test connection and run command
   hosts: 192.168.186.128
   gather_facts: true
-  become: true
-  become_user: root
-      
+  vars_files:
+    - /var/password.yml
+    
   tasks:
     - name: Test ping
       ping:
+
     - name: Run command
       command: cat /etc/os-release
       register: os_release
-      
+
     - name: Print OS details
       debug:
         var: os_release.stdout_lines
-        
+
     - name: Display IP address
       command: "hostname -I"
       register: ip_address_output
